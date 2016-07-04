@@ -15,6 +15,10 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+# Chart javascript library
+gem 'chart-js-rails'
+# React.js
+gem 'react-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
