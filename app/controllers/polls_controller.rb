@@ -28,12 +28,19 @@ class PollsController < ApplicationController
 		@poll = Poll.new
 	end
 	def create
-		@poll = Poll.new poll_params
+		options_hash = Hash.new(0)
+		options_symbols = []
+		params[:poll][:options].each do |o|
+			options_hash[o.to_sym] = 0
+			options_symbols << o.to_sym
+		end
+		params[:poll][:options] = options_hash
+		@poll = Poll.new poll_params(options_symbols)
 		@poll.save
-		redirect_to poll_stats_path(@poll)
+		redirect_to poll_path(@poll)
 	end
 	private
-	def poll_params
-		params.require(:poll).permit(:options, :title, :public)
+	def poll_params(options_symbols)
+		params.require(:poll).permit(:title, :public, options: [options_symbols])
 	end
 end

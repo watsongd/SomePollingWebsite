@@ -1,6 +1,6 @@
 var Stats = React.createClass({
   getInitialState: function() {
-    setInterval(this.getUpdatedData, 1000);
+    setInterval(this.getUpdatedData, 20000);
     return {
       labels: this.props.labels,
       data: this.props.data,
