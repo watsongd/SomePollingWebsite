@@ -36,4 +36,6 @@ class PollsController < ApplicationController
 	def poll_params
 		params.require(:poll).permit(:options, :title, :public)
 	end
+	def home
+	end
 end
