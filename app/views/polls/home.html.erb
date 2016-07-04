@@ -1,25 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<link href="https://fonts.googleapis.com/css?family=Assistant|Baloo+Da" rel="stylesheet">
-</head>
 <body background="http://phandroid.s3.amazonaws.com/wp-content/uploads/2014/10/mountain-sunset.jpg">
-<center>
-	<h1 style= "font-family: 'Baloo Da', cursive;
-				color: white;
-			    font-size: 100px;">
-		Some Polling Website
-	</h1>
-</center>
-<center>
-	<p style="font-family: 'Assistant', sans-serif;
-			  color: white; 
-			  font-size: 28px;">
-		Welcome to Some Polling Website!  Click the button below to begin making a poll!
-	</p>
-</center>
-<center>
-	<%= button_to "New Poll!", polls_new_path(), method: "get" %>
-</center>
+	<center>
+		<h1 class="title">
+			Some Polling Website
+		</h1>
+	</center>
+	<center>
+		<p class="description">
+			Welcome to Some Polling Website!  Click the button below to begin making a poll!
+		</p>
+	</center>
+	<center>
+		<%= button_to "New Poll!", new_poll_path, method: "get" %>
+	</center>
 </body>
-</html>

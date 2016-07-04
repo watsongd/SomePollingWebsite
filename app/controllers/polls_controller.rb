@@ -39,10 +39,10 @@ class PollsController < ApplicationController
 		@poll.save
 		redirect_to poll_path(@poll)
 	end
+	def home
+	end
 	private
 	def poll_params(options_symbols)
 		params.require(:poll).permit(:title, :public, options: [options_symbols])
-	end
-	def home
 	end
 end
