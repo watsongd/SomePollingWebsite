@@ -1,6 +1,6 @@
 var Stats = React.createClass({
   getInitialState: function() {
-    setInterval(this.getUpdatedData, 15000);
+    setInterval(this.getUpdatedData, 1000);
     return {
       labels: this.props.labels,
       data: this.props.data,
@@ -37,7 +37,7 @@ var Stats = React.createClass({
         }
     });
     return(
-
+      <div></div>
     )
   }
 });
