@@ -37,8 +37,11 @@ class PollsController < ApplicationController
 		options_hash.delete(:"")
 		params[:poll][:options] = options_hash
 		@poll = Poll.new poll_params(options_symbols)
-		@poll.save
-		redirect_to poll_path(@poll)
+		if @poll.save
+		  redirect_to poll_path(@poll)
+		else
+			redirect_to new_poll_path, alert: @poll.errors
+		end
 	end
 	def home
 	end
