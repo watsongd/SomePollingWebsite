@@ -34,6 +34,7 @@ class PollsController < ApplicationController
 			options_hash[o.to_sym] = 0
 			options_symbols << o.to_sym
 		end
+		options_hash.delete(:"")
 		params[:poll][:options] = options_hash
 		@poll = Poll.new poll_params(options_symbols)
 		@poll.save
