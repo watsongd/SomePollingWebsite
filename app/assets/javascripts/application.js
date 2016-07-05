@@ -12,9 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require materialize-sprockets
 //= require Chart
 //= require turbolinks
 //= require react
 //= require react_ujs
 //= require components
 //= require_tree .
+

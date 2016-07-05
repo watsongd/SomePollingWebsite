@@ -21,7 +21,7 @@ var NewPoll = React.createClass({
       );
     });
     return (
-      <div>
+      <div className="container">
         <form action="/polls" id="new_poll" method="post">
           <input name="authenticity_token" type="hidden" value={this.props.authenticity_token} />
           <label for="poll_title">Title</label>:
@@ -30,8 +30,14 @@ var NewPoll = React.createClass({
           <br />
           {optionsInputs}
           <br />
-          <input type="radio" name="poll[public]" value="false"/> False<br />
-          <input type="radio" name="poll[public]" value="true" /> True<br />
+          <p>
+            <input type="radio" name="poll[public]" value="false" id="false"/> <br />
+            <label for="false">False</label>
+          </p>
+          <p>
+            <input type="radio" name="poll[public]" value="true"  id="true"/> <br />
+            <label for="true">True</label>
+          </p>
           <button type="button" onClick={this.addOption}>Add option</button>
           <input name="commit" type="submit" value="Create Poll" />
         </form>
