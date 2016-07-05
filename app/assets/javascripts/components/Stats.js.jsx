@@ -1,6 +1,6 @@
 var Stats = React.createClass({
   getInitialState: function() {
-    setInterval(this.getUpdatedData, 20000);
+    setInterval(this.getUpdatedData, 10000);
     return {
       labels: this.props.labels,
       data: this.props.data,
@@ -20,7 +20,7 @@ var Stats = React.createClass({
     );
   },
   render: function() {
-    var ctx = document.getElementById("myChart");
+    var ctx = document.getElementById("myChart").getContext("2d");
     var myPieChart = new Chart(ctx,{
         type: 'pie',
         data: {
