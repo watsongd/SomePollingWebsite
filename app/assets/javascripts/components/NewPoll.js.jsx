@@ -29,32 +29,45 @@ var NewPoll = React.createClass({
     let options = this.state.options;
     var optionsInputs = this.state.options.map(function(option, index) {
       return (
-        <div key={index}>
-          <input type="button" value="-" onClick={() => remove(index)} />
-          <input key={index} id={index} name="poll[options][]" type="text" onChange={(evt) => handleOptionChange(index, evt)} value={options[index]} placeholder="Write option here"/>
+        <div className="row" key={index}>
+          <div className="col s1">
+            <a className="btn-floating btn-large red" onClick={() => remove(index)}>
+              <i className="material-icons">delete</i>
+            </a>
+          </div>
+          <div className="col s11">
+            <input key={index} id={index} name="poll[options][]" type="text" onChange={(evt) => handleOptionChange(index, evt)} value={options[index]} placeholder="Write option here"/>
+          </div>
           <br />
         </div>
       );
     });
     return (
-      <div className="container">
-        <form action="/polls" id="new_poll" method="post">
+      <div className="row">
+        <form className="col s12" action="/polls" id="new_poll" method="post">
           <input name="authenticity_token" type="hidden" value={this.props.authenticity_token} />
-          <label for="poll_title">Title</label>:
-          <input id="poll_title" name="poll[title]" type="text" /><br />
+          <div className="input-field">
+            <input id="poll_title" name="poll[title]" type="text" /><br />
+            <label for="poll_title">Title</label>
+          </div>
           <label>Options:</label>
           <br />
           {optionsInputs}
+          <a className="btn" onClick={this.addOption}>
+            Add Option
+          </a>
           <p>
-            <input type="radio" name="poll[public]" value="false" id="false" /> <br />
-            <label for="false">False</label>
+            <input type="radio" name="poll[public]" value="false" id="false" />
+            <label for="false">Private</label>
           </p>
           <p>
-            <input type="radio" name="poll[public]" value="true"  id="true" /> <br />
-            <label for="true">True</label>
+            <input type="radio" name="poll[public]" value="true" id="true" />
+            <label for="true">Public</label>
           </p>
-          <button type="button" onClick={this.addOption}>Add option</button>
-          <input name="commit" type="submit" value="Create Poll" />
+          <button className="btn" name="commit" type="submit" value="Create Poll">
+            Submit
+            <i className="material-icons right">send</i>
+          </button>
         </form>
       </div>
     );
