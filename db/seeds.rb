@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+for i in 1..20
+  if i % 2 == 0
+    Poll.create(title: i.to_s, options: {"yes": 0, "no": 0}, public: true)
+  else
+    Poll.create(title: i.to_s, options: {"yes": 0, "no": 0}, public: false)
+  end
+end

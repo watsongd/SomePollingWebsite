@@ -10,14 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160703054053) do
+ActiveRecord::Schema.define(version: 20160708044031) do
 
   create_table "polls", force: :cascade do |t|
     t.string   "title"
     t.text     "options"
     t.boolean  "public"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "cached_votes", default: 0
   end
 
 end

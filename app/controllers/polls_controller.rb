@@ -6,7 +6,7 @@ class PollsController < ApplicationController
 		@poll = Poll.find(params[:id])
 		@options = @poll.options
 		@options[params[:option].to_sym] += 1
-		@poll.update options: @options
+		@poll.update options: @options, cached_votes: @poll.cached_votes + 1
 		redirect_to poll_stats_path(params[:id])
 	end
 	def stats
@@ -44,6 +44,9 @@ class PollsController < ApplicationController
 		end
 	end
 	def home
+	end
+	def trending
+		@top_polls = Poll.where(public: true).order(cached_votes: :desc).first(10)
 	end
 	private
 	def poll_params(options_symbols)
