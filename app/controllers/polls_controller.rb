@@ -1,12 +1,13 @@
 class PollsController < ApplicationController
 	def show
 		@poll = Poll.find(params[:id])
+		@password = params[:password]
 	end
 	def vote
-		if Poll.find(params[:id]).vote(params[:option])
+		if Poll.find(params[:id]).vote(params[:option], params[:password])
 			redirect_to poll_stats_path(params[:id])
 		else
-			redirect_to poll_path(params[:id]), flash[:errors] = "error voting for poll"
+			redirect_to poll_path(params[:id]), alert: "wrong password for private poll"
 		end
 	end
 	def stats
@@ -28,6 +29,10 @@ class PollsController < ApplicationController
 		@poll = Poll.new
 	end
 	def create
+		if params[:poll][:public] == "false"
+			puts "its private"
+			params[:poll][:password] = SecureRandom.hex(10)
+		end
 		options_hash = Hash.new(0)
 		options_symbols = []
 		params[:poll][:options].each do |o|
@@ -38,7 +43,7 @@ class PollsController < ApplicationController
 		params[:poll][:options] = options_hash
 		@poll = Poll.new poll_params(options_symbols)
 		if @poll.save
-		  redirect_to poll_path(@poll)
+		  redirect_to poll_path(@poll, password: @poll.password)
 		else
 			redirect_to new_poll_path, alert: @poll.errors
 		end
@@ -55,6 +60,6 @@ class PollsController < ApplicationController
 	end
 	private
 	def poll_params(options_symbols)
-		params.require(:poll).permit(:title, :public, options: [options_symbols])
+		params.require(:poll).permit(:title, :public, :password, options: [options_symbols])
 	end
 end

@@ -3,5 +3,5 @@ Title: <%= @poll.title %>
 <% @poll.options.each do |option, count| %>
   <%= option %>
   <%= count %>
-  <%= button_to "Vote", poll_vote_path(id: @poll.id, option: option), class: "btn" %>
+  <%= button_to "Vote", poll_vote_path(id: @poll.id, option: option, password: @password), class: "btn" %>
 <% end %>

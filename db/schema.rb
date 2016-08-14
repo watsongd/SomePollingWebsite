@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160708044031) do
+ActiveRecord::Schema.define(version: 20160814152230) do
 
   create_table "polls", force: :cascade do |t|
     t.string   "title"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20160708044031) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.integer  "cached_total_votes", default: 0
+    t.string   "password"
     t.index ["cached_total_votes"], name: "index_polls_on_cached_total_votes"
   end
 
