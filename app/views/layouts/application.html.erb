@@ -14,19 +14,19 @@
         <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li>
-            <form action="/search" method="post">
-            <input name="authenticity_token" type="hidden" value=<%= form_authenticity_token %> />
+            <form action="/search" method="get">
+              <input name="page" type="hidden" value=1 />
               <div class="input-field">
                 <input id="search" type="search" name="query" placeholder="search" required>
                 <label for="search"><i class="material-icons">search</i></label>
               </div>
             </form>
           </li>
-          <li><%= link_to "Trending", poll_trending_path %></li>
-          <li><%= link_to "New Poll", new_poll_path %></li>
+          <li class=<%= "active" if request.fullpath =~ /\/trending/ %>><%= link_to "Trending", poll_trending_path %></li>
+          <li class=<%= "active" if request.fullpath =~ /\/polls\/new/ %>><%= link_to "New Poll", new_poll_path %></li>
         </ul>
         <ul class="side-nav" id="mobile">
-          <li><%= link_to "Search", new_poll_search_path %></li>
+          <li><%= link_to "Search", poll_search_path %></li>
           <li><%= link_to "Trending", poll_trending_path %></li>
           <li><%= link_to "New Poll", new_poll_path %></li>
         </ul>
@@ -36,5 +36,30 @@
     <%= render "flash" if !flash.empty? %>
       <%= yield %>
     </div>
+    <footer class="page-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Some Polling Website</h5>
+            <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+        © <%= Date.today.year %> Copyright
+        <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

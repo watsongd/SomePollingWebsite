@@ -5,6 +5,5 @@ Rails.application.routes.draw do
   post "/poll/:id/stats/:option", to: "polls#vote", as: "poll_vote"
   get "/polls/:id/stats/.json", to: "polls#stats_json", as: "poll_stats_json"
   get "/trending", to: "polls#trending", as: "poll_trending"
-  get "/search", to: "polls#new_search", as: "new_poll_search"
-  post "/search/", to: "polls#search", as: "poll_search"
+  get "/search", to: "polls#search", as: "poll_search"
 end

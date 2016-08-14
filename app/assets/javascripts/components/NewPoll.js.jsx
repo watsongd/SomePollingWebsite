@@ -61,7 +61,7 @@ var NewPoll = React.createClass({
           <input name="authenticity_token" type="hidden" value={this.props.authenticity_token} />
           <div className="input-field">
             <input id="poll_title" name="poll[title]" type="text" /><br />
-            <label for="poll_title">Title</label>
+            <label htmlFor="poll_title">Title</label>
           </div>
           <label>Options:</label>
           <br />
@@ -70,12 +70,12 @@ var NewPoll = React.createClass({
             Add Option
           </a>
           <p onClick={this.handleRadioChangePrivate} >
-            <input type="radio" name="poll[public]" checked={!this.state.public} id="private" value={this.state.public} readOnly/>
-            <label for="private">Private</label>
+            <input type="radio" name="poll[public]" id="private" checked={!this.state.public} value={this.state.public} readOnly/>
+            <label htmlFor="private">Private</label>
           </p>
           <p onClick={this.handleRadioChangePublic} >
-            <input type="radio" name="poll[public]" checked={this.state.public} id="public" value={this.state.public} readOnly/>
-            <label for="public">Public</label>
+            <input type="radio" name="poll[public]" id="public" checked={this.state.public} value={this.state.public} readOnly/>
+            <label htmlFor="public">Public</label>
           </p>
           <button className="btn" name="commit" type="submit" value="Create Poll">
             Create Poll

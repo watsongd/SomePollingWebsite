@@ -8,8 +8,8 @@
 
 for i in 1..20
   if i % 2 == 0
-    Poll.create(title: i.to_s, options: {"yes": 0, "no": 0}, public: true)
+    Poll.create(title: i.to_s, options: {"yes": i, "no": i}, public: true)
   else
-    Poll.create(title: i.to_s, options: {"yes": 0, "no": 0}, public: false)
+    Poll.create(title: i.to_s, options: {"yes": i, "no": i}, public: false)
   end
 end

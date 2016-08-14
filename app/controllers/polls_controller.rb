@@ -29,23 +29,17 @@ class PollsController < ApplicationController
 		@poll = Poll.new
 	end
 	def create
-		if params[:poll][:public] == "false"
-			puts "its private"
-			params[:poll][:password] = SecureRandom.hex(10)
-		end
-		options_hash = Hash.new(0)
-		options_symbols = []
-		params[:poll][:options].each do |o|
-			options_hash[o.to_sym] = 0
-			options_symbols << o.to_sym
-		end
-		options_hash.delete(:"")
-		params[:poll][:options] = options_hash
-		@poll = Poll.new poll_params(options_symbols)
-		if @poll.save
-		  redirect_to poll_path(@poll, password: @poll.password)
-		else
-			redirect_to new_poll_path, alert: @poll.errors
+		begin
+			new_params, options_symbols = Poll.create_params_for_poll(params)
+			params = new_params
+			@poll = Poll.new poll_params(options_symbols)
+			if @poll.save
+			  redirect_to poll_path(@poll, password: @poll.password)
+			else
+				redirect_to new_poll_path, alert: @poll.errors
+			end
+		rescue NoMethodError
+			redirect_to new_poll_path, alert: "incorrect input values"
 		end
 	end
 	def home
@@ -56,7 +50,14 @@ class PollsController < ApplicationController
 	def new_search
 	end
 	def search
+		@page = params[:page]
+		@query = params[:query]
+		if @page == nil || @query == nil
+			render "new_search"
+		end
 		@polls = Poll.where("title like ?", "%#{params[:query]}%")
+		@num_of_pages = @polls.length / 10 + 1
+		@polls = @polls[(@page.to_i * 10 - 10)..(@page.to_i * 10)]
 	end
 	private
 	def poll_params(options_symbols)
