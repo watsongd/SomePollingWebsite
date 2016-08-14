@@ -2,10 +2,11 @@ var Stats = React.createClass({
   getInitialState: function() {
     setInterval(this.getUpdatedData, 10000);
     return {
+      myPieChart: null,
       labels: this.props.labels,
       data: this.props.data,
       backgroundColors: this.props.backgroundColors,
-      id: this.props.id 
+      id: this.props.id
     }
   },
   getUpdatedData: function(e) {
@@ -19,7 +20,7 @@ var Stats = React.createClass({
       }.bind(this)
     );
   },
-  render: function() {
+  componentDidMount: function() {
     var ctx = document.getElementById("myChart").getContext("2d");
     var myPieChart = new Chart(ctx,{
         type: 'pie',
@@ -36,6 +37,8 @@ var Stats = React.createClass({
           animation: false
         }
     });
+  },
+  render: function() {
     return(
       <div></div>
     )

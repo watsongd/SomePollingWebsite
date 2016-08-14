@@ -15,3 +15,26 @@
  */
 @import "materialize";
 @import "materialize/extras/nouislider";
+.flash-alert {
+  background-color: red;
+}
+
+.nav-color-white {
+  background-color: #FFF;
+}
+
+a.brand-logo, nav a, nav ul a, nav .input-field label i {
+  color: #66757f !important;
+}
+
+.button-submit {
+  background-color: #26AA6C !important;
+}
+
+.button-new {
+  background-color: #FF6E6E !important;
+}
+
+body {
+  background-color: #f8f8f8;
+}

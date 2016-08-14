@@ -3,16 +3,38 @@
   <head>
     <title>Project</title>
     <%= csrf_meta_tags %>
-
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link href="https://fonts.googleapis.com/css?family=Assistant|Baloo+Da" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
-
   <body>
-    <%= render "flash" if !flash.empty? %>
+    <nav class="nav-color-white">
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo">Some Polling Website</a>
+        <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>
+            <form action="/search" method="post">
+            <input name="authenticity_token" type="hidden" value=<%= form_authenticity_token %> />
+              <div class="input-field">
+                <input id="search" type="search" name="query" placeholder="search" required>
+                <label for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+          </li>
+          <li><%= link_to "Trending", poll_trending_path %></li>
+          <li><%= link_to "New Poll", new_poll_path %></li>
+        </ul>
+        <ul class="side-nav" id="mobile">
+          <li><%= link_to "Search", new_poll_search_path %></li>
+          <li><%= link_to "Trending", poll_trending_path %></li>
+          <li><%= link_to "New Poll", new_poll_path %></li>
+        </ul>
+      </div>
+    </nav>
     <div class="container">
+    <%= render "flash" if !flash.empty? %>
       <%= yield %>
     </div>
   </body>

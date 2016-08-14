@@ -16,9 +16,10 @@ ActiveRecord::Schema.define(version: 20160708044031) do
     t.string   "title"
     t.text     "options"
     t.boolean  "public"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "cached_votes", default: 0
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "cached_total_votes", default: 0
+    t.index ["cached_total_votes"], name: "index_polls_on_cached_total_votes"
   end
 
 end

@@ -1,0 +1,4 @@
+<% @polls.each do |p| %>
+  <%= link_to p.title, poll_path(p) %>
+  <br />
+<% end %>

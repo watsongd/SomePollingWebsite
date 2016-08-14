@@ -3,11 +3,11 @@ class PollsController < ApplicationController
 		@poll = Poll.find(params[:id])
 	end
 	def vote
-		@poll = Poll.find(params[:id])
-		@options = @poll.options
-		@options[params[:option].to_sym] += 1
-		@poll.update options: @options, cached_votes: @poll.cached_votes + 1
-		redirect_to poll_stats_path(params[:id])
+		if Poll.find(params[:id]).vote(params[:option])
+			redirect_to poll_stats_path(params[:id])
+		else
+			redirect_to poll_path(params[:id]), flash[:errors] = "error voting for poll"
+		end
 	end
 	def stats
 		@poll = Poll.find(params[:id])
@@ -46,7 +46,12 @@ class PollsController < ApplicationController
 	def home
 	end
 	def trending
-		@top_polls = Poll.where(public: true).order(cached_votes: :desc).first(10)
+		@top_polls = Poll.where(public: true).order(cached_total_votes: :desc).first(10)
+	end
+	def new_search
+	end
+	def search
+		@polls = Poll.where("title like ?", "%#{params[:query]}%")
 	end
 	private
 	def poll_params(options_symbols)

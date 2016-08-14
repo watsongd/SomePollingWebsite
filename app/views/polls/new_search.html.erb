@@ -1,0 +1,12 @@
+<div class="row">
+  <form class="col s12" action="/search" id="new_search" method="post">
+    <input name="authenticity_token" type="hidden" value=<%= form_authenticity_token %> />
+    <div class="input-field">
+      <input id="query" name="query" type="text" /><br />
+      <label for="query">Search</label>
+    </div>
+    <button class="btn" name="commit" type="submit" value="Search">
+      Search
+    </button>
+  </form>
+</div>

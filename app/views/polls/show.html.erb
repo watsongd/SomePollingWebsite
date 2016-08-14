@@ -1,9 +1,7 @@
-<%= @poll.title %>
+Title: <%= @poll.title %>
 <br />
-<%= @poll.public %>
-<br />
-<% @poll.options.each do |o, c|%>
-  <%= o %>
-  <%= c %>
-  <%= button_to "Vote", poll_vote_path(id: @poll.id, option: o) %>
+<% @poll.options.each do |option, count| %>
+  <%= option %>
+  <%= count %>
+  <%= button_to "Vote", poll_vote_path(id: @poll.id, option: option), class: "btn" %>
 <% end %>

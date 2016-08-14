@@ -1,4 +1,17 @@
-<% @top_polls.each do |p| %>
-  <%= link_to p.title, poll_path(p) %>
-  <br />
-<% end %>
+<table class="bordered highlight">
+  <thead>
+    <tr>
+        <th data-field="id">Title</th>
+        <th data-field="votes">Total Votes</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @top_polls.each do |p| %>
+      <tr>
+        <td><%= link_to p.title, poll_path(p) %></td>
+        <td><%= p.cached_total_votes %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
