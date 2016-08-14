@@ -70,11 +70,11 @@ var NewPoll = React.createClass({
             Add Option
           </a>
           <p onClick={this.handleRadioChangePrivate} >
-            <input type="radio" name="poll[public]" checked={!this.state.public} id="private" value={this.state.public} />
+            <input type="radio" name="poll[public]" checked={!this.state.public} id="private" value={this.state.public} readOnly/>
             <label for="private">Private</label>
           </p>
           <p onClick={this.handleRadioChangePublic} >
-            <input type="radio" name="poll[public]" checked={this.state.public} id="public" value={this.state.public} />
+            <input type="radio" name="poll[public]" checked={this.state.public} id="public" value={this.state.public} readOnly/>
             <label for="public">Public</label>
           </p>
           <button className="btn" name="commit" type="submit" value="Create Poll">
