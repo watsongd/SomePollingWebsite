@@ -1,17 +1,1 @@
-<!-- <body background="http://phandroid.s3.amazonaws.com/wp-content/uploads/2014/10/mountain-sunset.jpg">
-	<center>
-		<h1 class="title">
-			Some Polling Website
-		</h1>
-	</center>
-	<center>
-		<p class="description">
-			Welcome to Some Polling Website!  Click the button below to begin making a poll!
-		</p>
-	</center>
-	<center>
-		<%= button_to "New Poll!", new_poll_path, method: "get" %>
-	</center>
-</body>
- -->
-  <%= react_component("NewPoll", {authenticity_token: form_authenticity_token}) %>
+<%= react_component("NewPoll", {authenticity_token: form_authenticity_token}) %>

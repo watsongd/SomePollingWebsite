@@ -5,3 +5,6 @@ Title: <%= @poll.title %>
   <%= count %>
   <%= button_to "Vote", poll_vote_path(id: @poll.id, option: option, password: @password), class: "btn" %>
 <% end %>
+<% if @password %>
+  send this link to your friends: <%= "http://localhost:3000/polls/" + @poll.id.to_s + "/?password=" + @password.to_s %>
+<% end %>
