@@ -10,11 +10,11 @@ var SetIntervalMixin = {
   }
 };
 
-var Pie = React.createClass({
+var Bar = React.createClass({
   mixins: [SetIntervalMixin],
   getInitialState: function() {
     return {
-      myPieChart: null,
+      myBarChart: null,
       labels: this.props.labels,
       data: this.props.data,
       backgroundColors: this.props.backgroundColors,
@@ -31,26 +31,37 @@ var Pie = React.createClass({
         this.setState({data: newData});
       }.bind(this)
     );
-    this.state.myPieChart.data.datasets[0].data = this.state.data;
-    this.state.myPieChart.update();
+    this.state.myBarChart.data.datasets[0].data = this.state.data;
+    this.state.myBarChart.update();
     this.setState({});
   },
   componentDidMount: function() {
     setInterval(this.getUpdatedData, 10000);
-    var ctx = document.getElementById("myPie").getContext("2d");
-    var myPieChart = new Chart(ctx,{
-      type: 'pie',
+    var ctx = document.getElementById("myBar").getContext("2d");
+    var myBarChart = new Chart(ctx,{
+      type: 'bar',
       data: {
         labels: this.state.labels,
         datasets: [
           {
+            label: "Responses",
             data: this.state.data,
-            backgroundColor: this.state.backgroundColors
+            backgroundColor: this.state.backgroundColors,
+            borderWidth: 1
           }
         ]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              min: 0
+            }
+          }]
+        }
       }
     });
-    this.setState({myPieChart: myPieChart});
+    this.setState({myBarChart: myBarChart});
   },
   render: function() {
     return(
