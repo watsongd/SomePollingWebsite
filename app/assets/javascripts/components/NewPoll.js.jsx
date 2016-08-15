@@ -43,12 +43,12 @@ var NewPoll = React.createClass({
     var optionsInputs = this.state.options.map(function(option, index) {
       return (
         <div className="row" key={index}>
-          <div className="col s1">
+          <div className="col s1 push-s11">
             <a className="btn-floating btn-large button-new" onClick={() => remove(index)}>
               <i className="material-icons">delete</i>
             </a>
           </div>
-          <div className="col s11">
+          <div className="col s11 pull-s1">
             <input key={index} id={index} name="poll[options][]" type="text" onChange={(evt) => handleOptionChange(index, evt)} value={options[index]} placeholder="Write option here"/>
           </div>
           <br />

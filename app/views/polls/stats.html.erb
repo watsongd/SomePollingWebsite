@@ -1,2 +1,19 @@
-<canvas id="myChart"></canvas>
-<%= react_component("Stats", {labels: @key_strings, data: @values, backgroundColors: @backgroundColors, id: @poll.id }) %>
+<div >
+<div class="row">
+  <div class="col s12">
+    <ul class="tabs">
+      <li class="tab col s3"><a href="#pie">Pie Chart</a></li>
+      <li class="tab col s3 disabled"><a href="#test2">Other</a></li>
+      <li class="tab col s3 disabled"><a href="#test3">Disabled Tab</a></li>
+      <li class="tab col s3 disabled"><a href="#test4">Some other stuff</a></li>
+    </ul>
+  </div>
+  <div id="pie" class="col s12">
+    <canvas id="myChart"></canvas>
+    <%= react_component("Stats", {labels: @key_strings, data: @values, backgroundColors: @backgroundColors, id: @poll.id }) %>
+  </div>
+  <div id="test2" class="col s12">Test 2</div>
+  <div id="test3" class="col s12">Test 3</div>
+  <div id="test4" class="col s12">Test 4</div>
+</div>
+</div>
