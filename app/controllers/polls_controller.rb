@@ -21,9 +21,6 @@ class PollsController < ApplicationController
 		@backgroundColors = []
 		@backgroundColorsBar = []
 		@borderColorsBar = []
-    @key_strings.length.times do |i|
-      @backgroundColors << "#%06x" % (rand(0xffffff))
-    end
     random = Random.new
     @key_strings.length.times do
     	r = random.rand(256).to_s
