@@ -10,7 +10,7 @@ var SetIntervalMixin = {
   }
 };
 
-var Stats = React.createClass({
+var Pie = React.createClass({
   mixins: [SetIntervalMixin],
   getInitialState: function() {
     return {
@@ -37,21 +37,18 @@ var Stats = React.createClass({
   },
   componentDidMount: function() {
     setInterval(this.getUpdatedData, 10000);
-    var ctx = document.getElementById("myChart").getContext("2d");
+    var ctx = document.getElementById("myPie").getContext("2d");
     var myPieChart = new Chart(ctx,{
-        type: 'pie',
-        data: {
-          labels: this.state.labels,
-          datasets: [
-            {
-              data: this.state.data,
-              backgroundColor: this.state.backgroundColors
-            }
-          ]
-        },
-        options: {
-          animation: false
-        }
+      type: 'pie',
+      data: {
+        labels: this.state.labels,
+        datasets: [
+          {
+            data: this.state.data,
+            backgroundColor: this.state.backgroundColors
+          }
+        ]
+      }
     });
     this.setState({myPieChart: myPieChart});
   },
