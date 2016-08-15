@@ -1,22 +1,25 @@
 class Poll < ApplicationRecord
-  has_many :voteips
+  has_many :votes
 	serialize :options, Hash
   validates :title, presence: { message: "Must include a title." }
   validates :options, presence: { message: "Must include options." }
   validates_inclusion_of :public, in: [true, false], message: "Must choose public/private."
 
-  def vote(option, password_guess)
-    if !is_public?
-      if correct_password?(password_guess)
-        return vote_on_option(option)
+  def vote(option, password_guess, user_ip)
+    if !(get_vote_ips.include? user_ip)
+      if !is_public?
+        if correct_password?(password_guess)
+          return vote_on_option(option, user_ip)
+        end
+      else
+        return vote_on_option(option, user_ip)
       end
-    else
-      return vote_on_option(option)
     end
     return false
   end
 
-  def vote_on_option(option)
+  def vote_on_option(option, user_ip)
+    Vote.create(ip: user_ip, poll_id: id)
     @options = options
     @options[option.to_sym] += 1
     if update options: @options, cached_total_votes: cached_total_votes + 1
@@ -43,6 +46,14 @@ class Poll < ApplicationRecord
     options_hash.delete(:"")
     params[:poll][:options] = options_hash
     return params, options_symbols
+  end
+
+  def get_vote_ips
+    ips = []
+    for vote in votes
+      ips << vote.ip
+    end
+    return ips
   end
 
   private

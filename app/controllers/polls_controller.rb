@@ -2,12 +2,13 @@ class PollsController < ApplicationController
 	def show
 		@poll = Poll.find(params[:id])
 		@password = params[:password]
+		@already_voted = @poll.get_vote_ips.include? request.remote_ip
 	end
 	def vote
-		if Poll.find(params[:id]).vote(params[:option], params[:password])
+		if Poll.find(params[:id]).vote(params[:option], params[:password], request.remote_ip)
 			redirect_to poll_stats_path(params[:id])
 		else
-			redirect_to poll_path(params[:id]), alert: "wrong password for private poll"
+			redirect_to poll_path(params[:id]), alert: "error in voting. you may have already voted, or this poll is private and you do not have the password."
 		end
 	end
 	def stats
@@ -56,7 +57,7 @@ class PollsController < ApplicationController
 			render "new_search"
 		end
 		@polls = Poll.where("title like ?", "%#{params[:query]}%")
-		@num_of_pages = @polls.length / 10 + 1
+		@num_of_pages = @polls.length == 0 ? 1 : (@polls.length - 1) / 10 + 1
 		@polls = @polls[(@page.to_i * 10 - 10)..(@page.to_i * 10)]
 	end
 	private
