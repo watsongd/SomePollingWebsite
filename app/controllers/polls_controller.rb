@@ -19,8 +19,19 @@ class PollsController < ApplicationController
 		end
 		@values = @poll.options.values
 		@backgroundColors = []
+		@backgroundColorsBar = []
+		@borderColorsBar = []
     @key_strings.length.times do |i|
       @backgroundColors << "#%06x" % (rand(0xffffff))
+    end
+    random = Random.new
+    @key_strings.length.times do
+    	r = random.rand(256).to_s
+    	g = random.rand(256).to_s
+    	b = random.rand(256).to_s
+    	@backgroundColorsBar << 'rgba(' + r + ', ' + g + ', ' + b + ', ' + '0.2)'
+    	@borderColorsBar << 'rgba(' + r + ', ' + g + ', ' + b + ', ' + '1)'
+    	@backgroundColors << 'rgba(' + r + ', ' + g + ', ' + b + ', ' + '1)'
     end
 	end
 	def stats_json

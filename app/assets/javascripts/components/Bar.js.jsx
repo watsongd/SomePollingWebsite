@@ -18,6 +18,7 @@ var Bar = React.createClass({
       labels: this.props.labels,
       data: this.props.data,
       backgroundColors: this.props.backgroundColors,
+      borderColors: this.props.borderColors,
       id: this.props.id
     }
   },
@@ -47,6 +48,7 @@ var Bar = React.createClass({
             label: "Responses",
             data: this.state.data,
             backgroundColor: this.state.backgroundColors,
+            borderColor: this.state.borderColors,
             borderWidth: 1
           }
         ]
@@ -58,7 +60,8 @@ var Bar = React.createClass({
               min: 0
             }
           }]
-        }
+        },
+        legend: false
       }
     });
     this.setState({myBarChart: myBarChart});
