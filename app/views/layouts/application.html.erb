@@ -22,12 +22,12 @@
               </div>
             </form>
           </li>
-          <li class=<%= "active" if request.fullpath =~ /\/trending/ %>><%= link_to "Trending", poll_trending_path %></li>
+          <li class=<%= "active" if request.fullpath =~ /\/trending/ %>><%= link_to "Trending", poll_trending_path, "data-turbolinks": false %></li>
           <li class=<%= "active" if request.fullpath =~ /\/polls\/new/ %>><%= link_to "New Poll", new_poll_path %></li>
         </ul>
         <ul class="side-nav" id="mobile">
           <li><%= link_to "Search", poll_search_path %></li>
-          <li><%= link_to "Trending", poll_trending_path %></li>
+          <li><%= link_to "Trending", poll_trending_path, "data-turbolinks": false %></li>
           <li><%= link_to "New Poll", new_poll_path %></li>
         </ul>
       </div>
