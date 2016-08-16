@@ -28,3 +28,6 @@ Cheffile.lock
 # Ignore curl tests files
 create_data
 vote_data
+
+# Ignore public assets for production
+/public/*
