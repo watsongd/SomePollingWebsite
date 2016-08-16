@@ -7,15 +7,14 @@
       <li class="tab col s3 disabled"><a href="#test4">Some other stuff</a></li>
     </ul>
     <h5 class="center-align"><%= @poll.title %></h5>
-    <p class="center light">Total votes: <%= @poll.cached_total_votes %></p>
   </div>
   <div id="pie" class="col s12">
     <canvas id="myPie"></canvas>
-    <%= react_component("Pie", {labels: @key_strings, data: @values, backgroundColors: @backgroundColors, id: @poll.id }) %>
+    <%= react_component("Pie", {labels: @key_strings, data: @values, backgroundColors: @backgroundColors, id: @poll.id, cached_total_votes: @poll.cached_total_votes }) %>
   </div>
   <div id="bar" class="col s12">
     <canvas id="myBar"></canvas>
-    <%= react_component("Bar", {labels: @key_strings, data: @values, borderColors: @borderColorsBar, backgroundColors: @backgroundColorsBar, id: @poll.id }) %>
+    <%= react_component("Bar", {labels: @key_strings, data: @values, borderColors: @borderColorsBar, backgroundColors: @backgroundColorsBar, id: @poll.id, cached_total_votes: @poll.cached_total_votes }) %>
   </div>
   <div id="test3" class="col s12">Test 3</div>
   <div id="test4" class="col s12">Test 4</div>

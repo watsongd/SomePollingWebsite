@@ -1,5 +1,5 @@
 class Api::V1::PollsController < Api::ApiController
-  respond_to :html, :xml, :json
+  respond_to :xml, :json
   def show
     @poll = Poll.find(params[:id])
     respond_with(@poll, status: 200)

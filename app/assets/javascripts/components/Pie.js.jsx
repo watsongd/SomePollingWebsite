@@ -14,6 +14,7 @@ var Pie = React.createClass({
   mixins: [SetIntervalMixin],
   getInitialState: function() {
     return {
+      cached_total_votes: this.props.cached_total_votes,
       myPieChart: null,
       labels: this.props.labels,
       data: this.props.data,
@@ -33,7 +34,6 @@ var Pie = React.createClass({
     );
     this.state.myPieChart.data.datasets[0].data = this.state.data;
     this.state.myPieChart.update();
-    this.setState({});
   },
   componentDidMount: function() {
     setInterval(this.getUpdatedData, 10000);
@@ -54,7 +54,7 @@ var Pie = React.createClass({
   },
   render: function() {
     return(
-      <div></div>
+      <p className="center light">Total votes: {this.state.cached_total_votes}</p>
     )
   }
 });

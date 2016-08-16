@@ -14,6 +14,7 @@ var Bar = React.createClass({
   mixins: [SetIntervalMixin],
   getInitialState: function() {
     return {
+      cached_total_votes: this.props.cached_total_votes,
       myBarChart: null,
       labels: this.props.labels,
       data: this.props.data,
@@ -29,12 +30,11 @@ var Bar = React.createClass({
         for (var key in json.options) {
           newData.push(json.options[key]);
         }
-        this.setState({data: newData});
+        this.setState({data: newData, cached_total_votes: json.cached_total_votes});
       }.bind(this)
     );
     this.state.myBarChart.data.datasets[0].data = this.state.data;
     this.state.myBarChart.update();
-    this.setState({});
   },
   componentDidMount: function() {
     setInterval(this.getUpdatedData, 10000);
@@ -68,7 +68,7 @@ var Bar = React.createClass({
   },
   render: function() {
     return(
-      <div></div>
+      <p className="center light">Total votes: {this.state.cached_total_votes}</p>
     )
   }
 });
