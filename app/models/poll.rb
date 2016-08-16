@@ -21,7 +21,11 @@ class Poll < ApplicationRecord
   def vote_on_option(option, user_ip)
     Vote.create(ip: user_ip, poll_id: id)
     @options = options
-    @options[option.to_sym] += 1
+    if @options[option.to_sym]
+      @options[option.to_sym] += 1
+    else
+      return false
+    end
     if update options: @options, cached_total_votes: cached_total_votes + 1
       return true
     else
@@ -31,21 +35,6 @@ class Poll < ApplicationRecord
 
   def is_public?
     return self.public
-  end
-
-  def self.create_params_for_poll(params)
-    if params[:poll][:public] == "false"
-      params[:poll][:password] = SecureRandom.hex(10)
-    end
-    options_hash = Hash.new(0)
-    options_symbols = []
-    params[:poll][:options].each do |o|
-      options_hash[o.to_sym] = 0
-      options_symbols << o.to_sym
-    end
-    options_hash.delete(:"")
-    params[:poll][:options] = options_hash
-    return params, options_symbols
   end
 
   def get_vote_ips

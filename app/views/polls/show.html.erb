@@ -21,7 +21,7 @@
 </ul>
 <br />
 <% if @password %>
-  send this link to your friends: <%= "http://localhost:3000/polls/" + @poll.id.to_s + "/?password=" + @password.to_s %>
+  send this link to your friends: <%= "http://somepollingwebsite.herokuapp.com/polls/" + @poll.id.to_s + "/?password=" + @password.to_s %>
 <% else %>
-  send this link to your friends: <%= "http://localhost:3000/polls/" + @poll.id.to_s + "/" %>
+  send this link to your friends: <%= "http://somepollingwebsite.herokuapp.com/polls/" + @poll.id.to_s %>
 <% end %>

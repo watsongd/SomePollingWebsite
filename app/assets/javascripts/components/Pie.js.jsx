@@ -22,7 +22,7 @@ var Pie = React.createClass({
     }
   },
   getUpdatedData: function(e) {
-    $.getJSON("/polls/" + this.state.id + "/stats/.json",
+    $.getJSON("/api/v1/polls/" + this.state.id,
       function(json) {
         var newData = new Array();
         for (var key in json.options) {

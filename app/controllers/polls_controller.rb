@@ -12,34 +12,14 @@ class PollsController < ApplicationController
 		end
 	end
 	def stats
-		@poll = Poll.find(params[:id])
-		@key_strings = []
-		@poll.options.keys.each do |key|
-			@key_strings << key.to_s
-		end
-		@values = @poll.options.values
-		@backgroundColors = []
-		@backgroundColorsBar = []
-		@borderColorsBar = []
-    random = Random.new
-    @key_strings.length.times do
-    	r = random.rand(256).to_s
-    	g = random.rand(256).to_s
-    	b = random.rand(256).to_s
-    	@backgroundColorsBar << 'rgba(' + r + ', ' + g + ', ' + b + ', ' + '0.2)'
-    	@borderColorsBar << 'rgba(' + r + ', ' + g + ', ' + b + ', ' + '1)'
-    	@backgroundColors << 'rgba(' + r + ', ' + g + ', ' + b + ', ' + '1)'
-    end
-	end
-	def stats_json
-		render json: Poll.find(params[:id]).to_json
+    @poll, @key_strings, @values, @backgroundColors, @backgroundColorsBar, @borderColorsBar = setup_stats(params[:id])
 	end
 	def new
 		@poll = Poll.new
 	end
 	def create
 		begin
-			new_params, options_symbols = Poll.create_params_for_poll(params)
+			new_params, options_symbols = create_params_for_poll(params)
 			params = new_params
 			@poll = Poll.new poll_params(options_symbols)
 			if @poll.save
@@ -48,7 +28,7 @@ class PollsController < ApplicationController
 				redirect_to new_poll_path, alert: @poll.errors
 			end
 		rescue NoMethodError
-			redirect_to new_poll_path, alert: "incorrect input values"
+			redirect_to new_poll_path, alert: "invalid input values"
 		end
 	end
 	def home
@@ -61,15 +41,9 @@ class PollsController < ApplicationController
 	def search
 		@page = params[:page]
 		@query = params[:query]
-		if @page == nil || @query == nil
+		if @page == nil || @query == nil || @query == ""
 			render "new_search"
 		end
-		@polls = Poll.where("title like ?", "%#{params[:query]}%")
-		@num_of_pages = @polls.length == 0 ? 1 : (@polls.length - 1) / 10 + 1
-		@polls = @polls[(@page.to_i * 10 - 10)..(@page.to_i * 10)]
-	end
-	private
-	def poll_params(options_symbols)
-		params.require(:poll).permit(:title, :public, :password, options: [options_symbols])
+		@polls, @num_of_pages = query(params[:page].to_i, params[:query])
 	end
 end
