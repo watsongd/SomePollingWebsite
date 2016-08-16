@@ -6,7 +6,7 @@ class Api::V1::PollsController < Api::ApiController
   end
   def create
     begin
-      new_params, options_symbols = Poll.create_params_for_poll(params)
+      new_params, options_symbols = create_params_for_poll(params)
       params = new_params
       @poll = Poll.new poll_params(options_symbols)
       if @poll.save

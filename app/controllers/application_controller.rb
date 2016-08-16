@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  rescue_from 'ActiveRecord::RecordNotFound' do |exception|
+    redirect_to root_path, status: 404
+  end
   def setup_stats(poll_id)
     poll = Poll.find(poll_id)
     key_strings = poll.options.keys.map { |k| k.to_s }
