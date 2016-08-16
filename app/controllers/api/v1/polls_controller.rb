@@ -15,7 +15,18 @@ class Api::V1::PollsController < Api::ApiController
         respond_with(@poll, status: 422)
       end
     rescue NoMethodError
+      render json: {error: "improper parameters"}, status: 400
+    end
+  end
+  def vote
+    @poll = Poll.find(params[:id])
+    if @poll.vote(params[:option], params[:password], request.remote_ip)
+      respond_with(@poll, status: 201)
+    else
       respond_with(@poll, status: 400)
     end
+  end
+  def search
+    respond_with(Poll.where("title like ?", "%#{params[:query]}%"), status: 200)
   end
 end

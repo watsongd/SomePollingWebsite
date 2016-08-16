@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   get "/search", to: "polls#search", as: "poll_search"
   namespace :api do
     namespace :v1 do
-      resources :polls, only: [:show]
+      resources :polls, only: [:show, :create]
+      post "/poll/:id/stats/:option", to: "polls#vote", as: "api_poll_vote"
+      get "/search", to: "polls#search", as: "api_poll_search"
     end
   end
 end

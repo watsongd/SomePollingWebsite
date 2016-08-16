@@ -24,3 +24,7 @@
 Vagrantfile
 Cheffile
 Cheffile.lock
+
+# Ignore curl tests files
+create_data
+vote_data
