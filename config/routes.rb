@@ -12,4 +12,5 @@ Rails.application.routes.draw do
       get "/search", to: "polls#search", as: "api_poll_search"
     end
   end
+  match '*unmatched_route', to: 'application#raise_not_found!', via: :all
 end

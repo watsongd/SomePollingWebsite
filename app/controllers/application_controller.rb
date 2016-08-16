@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
   rescue_from 'ActiveRecord::RecordNotFound' do |exception|
     redirect_to root_path, status: 404
   end
+  def raise_not_found!
+    render "layouts/page_not_found"
+  end
   def setup_stats(poll_id)
     poll = Poll.find(poll_id)
     key_strings = poll.options.keys.map { |k| k.to_s }
